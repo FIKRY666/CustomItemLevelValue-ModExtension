@@ -15,9 +15,7 @@
  * 2. 与 info.ini、preview.png 一起放入 Mods/DemoModExtension/ 文件夹
  * 3. 在游戏Mod界面中启用此Mod
  * 
- * 作者: YourName
- * 版本: 1.0.0
- * 日期: 2024
+ * 作者: Qmoon.
  */
 
 using Duckov.Modding;
