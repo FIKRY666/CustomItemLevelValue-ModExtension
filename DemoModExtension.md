@@ -1,4 +1,4 @@
-## 📄 DemoModExtension/ModBehaviour.cs（完整示例版）
+## 📄 DemoModExtension/ModBehaviour.cs 示例文件
 
 ```csharp
 using Duckov.Modding;
