@@ -6,7 +6,7 @@
 
 ### 1. 环境要求
 - 《逃离鸭科夫》游戏本体
-- [CustomItemLevelValue Mod](https://github.com/yourusername/CustomItemLevelValue) (v2.0+)
+- [CustomItemLevelValue Mod](https://steamcommunity.com/sharedfiles/filedetails/?id=3612733981) 
 - Visual Studio 或任何C#开发环境
 - .NET Standard 2.1 SDK
 
