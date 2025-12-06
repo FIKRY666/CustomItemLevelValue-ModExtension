@@ -39,7 +39,8 @@
 
 ### 1. 前置要求
 - 《逃离鸭科夫》游戏本体
-- [CustomItemLevelValue Mod]([https://steamcommunity.com/sharedfiles/filedetails/?id=3612733981])
+- [CustomItemLevelValue Mod](https://steamcommunity.com/sharedfiles/filedetails/?id=3612733981) 
+
 - .NET Standard 2.1开发环境
 
 ### 2. 创建你的第一个扩展Mod
