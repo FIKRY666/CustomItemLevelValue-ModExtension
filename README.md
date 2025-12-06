@@ -1,6 +1,6 @@
-# README.md
 
-```markdown
+
+
 # CustomItemLevelValue - ModExtensions 框架
 
 [![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/yourusername/CustomItemLevelValue/blob/main/LICENSE)
