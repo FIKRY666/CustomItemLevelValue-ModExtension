@@ -349,7 +349,7 @@ public class YourModBehaviour : Duckov.Modding.ModBehaviour
 
 ## 🌟 星标历史
 
-[![Star History Chart](https://api.star-history.com/svg?repos=FIKRY666/CustomItemLevelValue&type=Date)](https://star-history.com/#FIKRY666/CustomItemLevelValue&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=FIKRY666/CustomItemLevelValue-ModExtension&type=Date)](https://star-history.com/#FIKRY666/CustomItemLevelValue-ModExtension&Date)
 
 ## 🙏 致谢
 
