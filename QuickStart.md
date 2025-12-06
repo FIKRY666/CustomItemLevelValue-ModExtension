@@ -287,28 +287,6 @@ catch (Exception ex)
 }
 ```
 
-## 📚 下一步学习
-
-### 推荐阅读
-1. **[完整API文档](./API-Reference.md)** - 详细的类和方法说明
-2. **[最佳实践](./BestPractices.md)** - 开发规范和建议
-3. **[演示Mod源码](./DemoModExtension.cs)** - 完整的功能演示
-4. **[框架原理](./Architecture.md)** - 深入了解实现机制
-
-### 进阶主题
-- 🔗 与其他Mod交互
-- 🎨 自定义颜色方案
-- 📊 数据持久化存储
-- 🌐 网络数据获取
-- 🔧 Harmony补丁技术
-
-### 社区资源
-- GitHub仓库问题区
-- Discord讨论频道
-- 开发者Wiki文档
-- 示例项目集合
-
----
 
 ## 🎉 恭喜！
 
@@ -324,4 +302,3 @@ catch (Exception ex)
 ---
 
 *更多帮助？查看 [完整文档](../README.md) 或加入社区讨论。*
-```
