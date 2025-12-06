@@ -303,7 +303,7 @@ private IEnumerator CleanupProcessedRecords()
 
 ## 🎮 示例Mod
 
-完整示例见 [DemoModExtension](./DemoModExtension.cs)，演示了：
+完整示例见 [DemoModExtension](./DemoModExtension.md)，演示了：
 - 五个位置的标准用法
 - 富文本颜色和格式
 - 正确的清理逻辑
