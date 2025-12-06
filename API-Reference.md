@@ -14,6 +14,248 @@ ModExtensions 是 **CustomItemLevelValue** Mod 的扩展框架，允许其他Mod
 | **Bottom1** | 描述后 | 来源、背景故事 |
 | **Bottom2** | 耐久度前 | 使用提示、维护信息 |
 
+## 🔄 动态缓存管理
+
+### 缓存刷新API
+当你的Mod动态更新字段时，需要手动刷新缓存才能立即显示新内容：
+
+```csharp
+// 使用缓存助手类（推荐）
+using CustomItemLevelValue.Utilities;
+
+// 刷新单个物品的缓存
+ModExtensionsCacheHelper.RefreshItemCache(item);
+
+// 刷新特定位置缓存
+ModExtensionsCacheHelper.RefreshPositionCache(item, "Top1");
+
+// 刷新指定前缀的缓存
+ModExtensionsCacheHelper.RefreshByPrefix("MyMod_");
+
+// 强制刷新所有缓存
+ModExtensionsCacheHelper.RefreshAll();
+
+// 查看缓存统计
+string stats = ModExtensionsCacheHelper.GetStats();
+Debug.Log(stats); // 输出: [ModExtensions] 缓存统计: X物品, Y位置, Z条目
+```
+
+### 动态更新示例
+```csharp
+// 实时数据更新演示
+public class RealTimeMod : Duckov.Modding.ModBehaviour
+{
+    private const string PREFIX = "Dynamic_";
+    private Dictionary<int, Coroutine> _starAnimations = new Dictionary<int, Coroutine>();
+    
+    private void OnEnable()
+    {
+        ItemHoveringUI.onSetupItem += OnItemHovered;
+    }
+    
+    private void OnItemHovered(ItemHoveringUI ui, Item item)
+    {
+        if (item == null) return;
+        
+        // 启动星星动画
+        StartStarAnimation(item);
+    }
+    
+    private void StartStarAnimation(Item item)
+    {
+        int itemId = item.GetInstanceID();
+        
+        // 停止已有动画
+        if (_starAnimations.ContainsKey(itemId) && _starAnimations[itemId] != null)
+        {
+            StopCoroutine(_starAnimations[itemId]);
+        }
+        
+        // 启动新动画
+        _starAnimations[itemId] = StartCoroutine(StarAnimationRoutine(item));
+    }
+    
+    private IEnumerator StarAnimationRoutine(Item item)
+    {
+        int stars = 1; // 从1颗星开始
+        
+        while (true)
+        {
+            // 更新星星显示
+            UpdateStarDisplay(item, stars);
+            
+            // 刷新缓存，立即显示更新
+            ModExtensionsCacheHelper.RefreshItemCache(item);
+            
+            // 等待0.3秒
+            yield return new WaitForSeconds(0.3f);
+            
+            // 更新星星数量
+            stars++;
+            if (stars > 5) // 达到5颗后重置
+            {
+                // 倒退回1颗星
+                for (int i = 4; i >= 1; i--)
+                {
+                    UpdateStarDisplay(item, i);
+                    ModExtensionsCacheHelper.RefreshItemCache(item);
+                    yield return new WaitForSeconds(0.3f);
+                }
+                stars = 1;
+            }
+        }
+    }
+    
+    private void UpdateStarDisplay(Item item, int filledStars)
+    {
+        // 生成星星字符串
+        string starsText = "";
+        for (int i = 1; i <= 5; i++)
+        {
+            if (i <= filledStars)
+            {
+                starsText += "[c=#FFD700]★[/c]"; // 实心金星
+            }
+            else
+            {
+                starsText += "[c=#AAAAAA]☆[/c]"; // 空心灰星
+            }
+            if (i < 5) starsText += " ";
+        }
+        
+        // 添加动画提示
+        string animationHint = filledStars < 5 ? 
+            $"[c=#FFAA00]↗ 增长中...[/c]" : 
+            $"[c=#55FFFF]↘ 回落中...[/c]";
+        
+        // 更新字段
+        item.Variables.SetString($"{PREFIX}Top1_动态评分", 
+            $"[b]动态评分:[/b] {starsText}\n{animationHint}");
+    }
+    
+    private void OnDisable()
+    {
+        ItemHoveringUI.onSetupItem -= OnItemHovered;
+        
+        // 停止所有动画
+        foreach (var coroutine in _starAnimations.Values)
+        {
+            if (coroutine != null) StopCoroutine(coroutine);
+        }
+        _starAnimations.Clear();
+        
+        // 清理字段
+        ModExtensionsCacheHelper.RefreshByPrefix(PREFIX);
+    }
+}
+```
+
+### 🔄 缓存刷新助手类
+
+```csharp
+// ModExtensionsCacheHelper.cs - 提供给其他Mod使用
+using UnityEngine;
+
+namespace CustomItemLevelValue.Utilities
+{
+    /// <summary>
+    /// ModExtensions缓存刷新助手
+    /// 供其他Mod开发者安全地刷新缓存
+    /// </summary>
+    public static class ModExtensionsCacheHelper
+    {
+        /// <summary>
+        /// 刷新指定物品的扩展缓存
+        /// </summary>
+        /// <param name="item">要刷新的物品</param>
+        /// <returns>是否成功</returns>
+        public static bool RefreshItemCache(Item item)
+        {
+            return ExecuteCacheMethod("RefreshItemCache", item);
+        }
+        
+        /// <summary>
+        /// 刷新指定物品的特定位置缓存
+        /// </summary>
+        /// <param name="item">目标物品</param>
+        /// <param name="position">位置名称</param>
+        /// <returns>是否成功</returns>
+        public static bool RefreshPositionCache(Item item, string position)
+        {
+            return ExecuteCacheMethod("RefreshItemPositionCache", item, position);
+        }
+        
+        /// <summary>
+        /// 刷新指定前缀的缓存
+        /// </summary>
+        /// <param name="prefix">Mod前缀</param>
+        /// <returns>是否成功</returns>
+        public static bool RefreshByPrefix(string prefix)
+        {
+            return ExecuteCacheMethod("RefreshCacheByPrefix", prefix);
+        }
+        
+        /// <summary>
+        /// 强制刷新所有缓存
+        /// </summary>
+        /// <returns>是否成功</returns>
+        public static bool RefreshAll()
+        {
+            return ExecuteCacheMethod("ForceRefreshAll");
+        }
+        
+        /// <summary>
+        /// 获取缓存统计信息
+        /// </summary>
+        /// <returns>统计信息字符串</returns>
+        public static string GetStats()
+        {
+            try
+            {
+                var type = GetManagerType();
+                if (type == null) return "ModExtensions未加载";
+                
+                var instance = type.GetProperty("Instance").GetValue(null);
+                var method = type.GetMethod("GetCacheStats");
+                
+                return method.Invoke(instance, null) as string;
+            }
+            catch (System.Exception)
+            {
+                return "获取统计失败";
+            }
+        }
+        
+        private static bool ExecuteCacheMethod(string methodName, params object[] args)
+        {
+            try
+            {
+                var type = GetManagerType();
+                if (type == null) return false;
+                
+                var instance = type.GetProperty("Instance").GetValue(null);
+                var method = type.GetMethod(methodName);
+                
+                if (method == null) return false;
+                
+                method.Invoke(instance, args);
+                return true;
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogWarning($"[CacheHelper] {methodName}失败: {ex.Message}");
+                return false;
+            }
+        }
+        
+        private static System.Type GetManagerType()
+        {
+            return System.Type.GetType("CustomItemLevelValue.Core.ModExtensionsManager, CustomItemLevelValue");
+        }
+    }
+}
+```
+
 ## 🔧 快速开始
 
 ### 1. 基本Mod结构
@@ -23,6 +265,7 @@ using Duckov.Modding;
 using Duckov.UI;
 using ItemStatsSystem;
 using UnityEngine;
+using CustomItemLevelValue.Utilities; // 引用缓存助手
 
 namespace YourModName
 {
@@ -64,16 +307,8 @@ namespace YourModName
             // 清理事件
             ItemHoveringUI.onSetupItem -= OnItemHovered;
             
-            // 清理你的字段
-            CleanupYourFields();
-        }
-        
-        private void CleanupYourFields()
-        {
-            // 通过框架清理
-            var manager = CustomItemLevelValue.Core.ModExtensionsManager.Instance;
-            manager.ClearCacheByPrefix(MOD_PREFIX);
-            manager.RemoveAllFieldsWithPrefix(MOD_PREFIX);
+            // 使用缓存助手清理
+            ModExtensionsCacheHelper.RefreshByPrefix(MOD_PREFIX);
         }
     }
 }
@@ -156,10 +391,14 @@ foreach (var ext in extensions)
     Debug.Log($"{ext.DisplayName}: {ext.DisplayValue}");
 }
 
-// 清理API
-manager.RefreshItemCache(item);          // 清理指定物品缓存
-manager.ClearCacheByPrefix("YourMod_");  // 清理指定前缀缓存
-manager.ClearAllCache();                 // 清理所有缓存
+// 缓存刷新API
+manager.RefreshItemCache(item);          // 刷新指定物品缓存
+manager.RefreshItemPositionCache(item, "Top1"); // 刷新指定位置
+manager.RefreshCacheByPrefix("YourMod_"); // 刷新前缀缓存
+manager.ForceRefreshAll();               // 强制刷新所有缓存
+
+// 统计信息
+string stats = manager.GetCacheStats();
 ```
 
 ### ExtensionData 结构
@@ -189,7 +428,36 @@ item.Variables.SetString("Mod_Top1_所有信息",
     "等级42 经验5000/6000 攻击力150 防御80 生命值300 魔法值200...");
 ```
 
-### 2. 颜色使用规范
+### 2. 动态数据刷新策略
+
+```csharp
+// ✅ 推荐：数据变更后立即刷新
+void UpdateRealTimeData(Item item, float newValue)
+{
+    item.Variables.SetString($"{PREFIX}Top2_实时数据", 
+        $"[c=#55FFFF]实时: {newValue:F1}[/c]");
+    
+    ModExtensionsCacheHelper.RefreshItemCache(item); // 立即生效
+}
+
+// ✅ 批量更新优化
+void BatchUpdate(List<Item> items)
+{
+    foreach (var item in items)
+    {
+        UpdateFields(item);
+    }
+    ModExtensionsCacheHelper.RefreshAll(); // 一次刷新所有
+}
+
+// ❌ 避免：高频无意义刷新
+void Update() // 每帧调用
+{
+    // 不要在这里刷新缓存！
+}
+```
+
+### 3. 颜色使用规范
 
 ```csharp
 // 状态指示
@@ -207,7 +475,7 @@ item.Variables.SetString("Mod_Top1_所有信息",
 "[c=#AAAAAA](次要信息)[/c]"   // 备注说明
 ```
 
-### 3. 清理策略
+### 4. 清理策略
 
 ```csharp
 private void OnDisable()
@@ -215,16 +483,10 @@ private void OnDisable()
     // 1. 移除事件监听
     ItemHoveringUI.onSetupItem -= OnItemHovered;
     
-    // 2. 通过框架清理字段
-    try
-    {
-        var manager = CustomItemLevelValue.Core.ModExtensionsManager.Instance;
-        manager.ClearCacheByPrefix(MOD_PREFIX);
-        manager.RemoveAllFieldsWithPrefix(MOD_PREFIX);
-    }
-    catch { }
+    // 2. 使用缓存助手清理
+    ModExtensionsCacheHelper.RefreshByPrefix(MOD_PREFIX);
     
-    // 3. 直接清理（备选）
+    // 3. 直接清理（备选方案）
     DirectCleanupFields();
 }
 
@@ -248,7 +510,7 @@ private void DirectCleanupFields()
 }
 ```
 
-### 4. 性能优化
+### 5. 性能优化
 
 ```csharp
 private HashSet<int> _processedItems = new HashSet<int>();
@@ -284,21 +546,26 @@ private IEnumerator CleanupProcessedRecords()
 - ✓ 字段名格式正确 `前缀_位置_字段名`
 - ✓ CustomItemLevelValue Mod已加载且启用
 - ✓ 查看游戏日志有无错误
-- ✓ 尝试清理缓存 `F11` (调试功能)
+- ✓ 尝试清理缓存 `ModExtensionsCacheHelper.RefreshAll()`
 
-### Q2: 颜色/格式不生效？
+### Q2: 动态更新不生效？
+- ✓ 更新字段后是否调用了 `RefreshItemCache(item)`？
+- ✓ 检查缓存助手是否成功加载
+- ✓ 查看游戏日志是否有反射错误
+
+### Q3: 颜色/格式不生效？
 - 检查标签是否正确闭合 `[c=#FF0000]文本[/c]`
 - 避免嵌套层级过深
 - 确保使用支持的BBCode标签
 
-### Q3: 同ID物品只有一个显示？
+### Q4: 同ID物品只有一个显示？
 - ModExtensions基于**物品实例**而非TypeID
 - 确保为每个物品实例都添加字段
 - 移除 `_processedItems` 检查或使用实例ID
 
-### Q4: 编辑Mod后显示旧内容？
+### Q5: 编辑Mod后显示旧内容？
 - 主Mod启动时会自动清理缓存
-- 可手动清理：游戏内按 `F11`
+- 可手动清理：`ModExtensionsCacheHelper.RefreshAll()`
 - 或重启游戏
 
 ## 🎮 示例Mod
@@ -308,13 +575,15 @@ private IEnumerator CleanupProcessedRecords()
 - 富文本颜色和格式
 - 正确的清理逻辑
 - 实例级别的字段管理
+- 动态数据更新和缓存刷新
 
 ## 📞 支持与反馈
 
 - 🐛 **问题报告**：游戏日志 + 详细描述
 - 💡 **功能建议**：通过社区提交
 - 📖 **文档更新**：欢迎贡献示例
+- 🔄 **缓存问题**：使用 `ModExtensionsCacheHelper.GetStats()` 获取信息
 
 ---
 
-**开始扩展你的Mod吧！** 🚀 使用这个框架，你可以为《逃离鸭科夫》的物品系统添加丰富的自定义信息，提升玩家体验。
+**开始扩展你的Mod吧！** 🚀 使用这个框架，你可以为《逃离鸭科夫》的物品系统添加丰富的自定义信息，支持实时数据更新和动态显示。
