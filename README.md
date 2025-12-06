@@ -91,7 +91,7 @@ namespace YourModName
 
 - **[快速入门指南](./QuickStart.md)** - 5分钟上手教程
 - **[API参考](./API-Reference.md)** - 完整API文档
-- **[示例Mod](./DemoModExtension.cs)** - 完整演示代码
+- **[示例Mod](./DemoModExtension.md)** - 完整演示代码
 
 ## 🔧 字段命名规范
 
