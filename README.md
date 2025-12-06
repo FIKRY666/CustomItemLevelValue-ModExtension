@@ -184,11 +184,7 @@ catch (Exception ex)
 - 特别感谢测试人员的宝贵意见
 
 ## 📞 支持与反馈
-
-- **问题反馈**: [GitHub Issues](https://github.com/yourusername/CustomItemLevelValue/issues)
-- **功能建议**: [GitHub Discussions](https://github.com/yourusername/CustomItemLevelValue/discussions)
-- **社区交流**: Discord服务器 (链接待添加)
-
+- [QQ群](https://qm.qq.com/q/c1uzZfNW8w) 
 ---
 
 **开始为你的Mod添加酷炫的自定义显示吧！** 🚀
