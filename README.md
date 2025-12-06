@@ -306,7 +306,6 @@ public class YourModBehaviour : Duckov.Modding.ModBehaviour
 
 - **[完整API文档](API-Reference.md)** - 详细API说明
 - **[实战示例代码](DemoModExtension.md)** - 完整演示Mod
-- **[性能测试报告](Performance-Test.md)** - 详细性能数据
 - **[常见问题解答](FAQ.md)** - 问题解决方案
 
 ## 🤝 贡献指南
