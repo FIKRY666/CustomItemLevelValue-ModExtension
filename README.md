@@ -8,7 +8,7 @@
 [![Game](https://img.shields.io/badge/Game-逃离鸭科夫-red.svg)](https://store.steampowered.com/app/3167020/_/)
 
 一个为《逃离鸭科夫》游戏设计的强大Mod框架，允许其他Mod在物品信息面板上添加自定义信息显示。
-
+[![MOD与演示MOD](https://github.com/FIKRY666/CustomItemLevelValue-ModExtension/releases/tag/MOD) 
 ## ✨ 特性
 
 ### 🎯 五段式显示系统
