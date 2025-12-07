@@ -1,4 +1,3 @@
-```csharp
 # 🎮 CustomItemLevelValue - ModExtensions 框架
 
 <div align="center">
