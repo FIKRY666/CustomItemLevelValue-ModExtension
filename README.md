@@ -29,20 +29,6 @@
 | 🔸 **模式2：直接引用** | 正式项目、性能要求高 | `CustomItemLevelValue.dll` | [Steam创意工坊订阅](https://steamcommunity.com/sharedfiles/filedetails/?id=3612733981) |
 ### 📥 快速获取文件
 
-```bash
-# 方式1: 直接下载（推荐新手）
-点击右侧 Releases → 下载最新版
-
-# 方式2: Git Clone（推荐开发者）
-git clone https://github.com/FIKRY666/CustomItemLevelValue-ModExtension.git
-
-# 方式3: 只下载需要的文件
-# 便携API（模式1）:
-wget https://raw.githubusercontent.com/FIKRY666/CustomItemLevelValue-ModExtension/main/ModExtensionsAPI.cs
-
-# 完整框架（模式2）:
-wget https://github.com/FIKRY666/CustomItemLevelValue-ModExtension/releases/latest/download/CustomItemLevelValue.dll
-```
 
 ## ⚡ 两种模式，任你选择
 
