@@ -219,14 +219,6 @@ void Start()
 3. 提交代码
 4. 创建Pull Request
 
-### 📊 查看统计数据
-```bash
-# 查看项目热度
-https://api.github.com/repos/FIKRY666/CustomItemLevelValue-ModExtension
-
-# 下载量统计
-https://github.com/FIKRY666/CustomItemLevelValue-ModExtension/releases
-```
 
 ## 📁 文件结构速览
 
@@ -277,10 +269,10 @@ void ShowMarketPrice(Item item)
 
 ## 📞 获取帮助
 
-1. **查看文档**：本仓库的Docs文件夹
-2. **参考示例**：Demo文件夹的完整代码
-3. **提交Issue**：描述你的问题
-4. **查看已有问题**：可能已经有人遇到过
+
+**参考示例**：Demo文件夹的完整代码
+**提交Issue**：描述你的问题
+**查看已有问题**：可能已经有人遇到过
 
 ## 📄 许可证
 
@@ -290,11 +282,6 @@ MIT License - 查看 [LICENSE](LICENSE) 文件了解详情。
 
 <div align="center">
 
-### ⭐ Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=FIKRY666/CustomItemLevelValue-ModExtension&type=Date)](https://star-history.com/#FIKRY666/CustomItemLevelValue-ModExtension&Date)
-
-**如果你觉得这个项目有用，请给它一个Star！✨**
 
 </div>
 
