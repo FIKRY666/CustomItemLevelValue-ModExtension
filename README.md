@@ -23,27 +23,10 @@
 
 ### 🔄 双模式支持：你选哪个？
 
-```mermaid
-graph TD
-    A[开始] --> B{使用模式选择};
-    B --> C[模式1: 便携API];
-    B --> D[模式2: 直接引用];
-    
-    C --> E[优点: 无需DLL引用];
-    C --> F[缺点: 需要反射];
-    
-    D --> G[优点: 性能更好];
-    D --> H[缺点: 需要DLL];
-    
-    E --> I[适合: 小型Mod];
-    F --> I;
-    G --> J[适合: 大型Mod];
-    H --> J;
-    
-    I --> K[下载: ModExtensionsAPI.cs];
-    J --> L[下载: CustomItemLevelValue.dll];
-```
-
+| 模式选择 | 适合人群 | 需要下载的文件 | 下载链接 |
+|---------|---------|--------------|----------|
+| 🔹 **模式1：便携API** | 新手、快速测试、不想引用DLL | `ModExtensionsAPI.cs` | [GitHub Releases - API](https://github.com/FIKRY666/CustomItemLevelValue-ModExtension/releases/tag/API) |
+| 🔸 **模式2：直接引用** | 正式项目、性能要求高 | `CustomItemLevelValue.dll` | [Steam创意工坊订阅](https://steamcommunity.com/sharedfiles/filedetails/?id=3612733981) |
 ### 📥 快速获取文件
 
 ```bash
