@@ -3,7 +3,7 @@
 <div align="center">
 
 [![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-2.0.0-brightgreen.svg)](https://github.com/FIKRY666/CustomItemLevelValue-ModExtension/releases)
+[![Version](https://img.shields.io/badge/version-2.1.17-brightgreen.svg)](https://github.com/FIKRY666/CustomItemLevelValue-ModExtension/releases)
 [![Downloads](https://img.shields.io/github/downloads/FIKRY666/CustomItemLevelValue-ModExtension/total.svg?color=orange)](https://github.com/FIKRY666/CustomItemLevelValue-ModExtension/releases)
 [![Open Issues](https://img.shields.io/github/issues/FIKRY666/CustomItemLevelValue-ModExtension.svg)](https://github.com/FIKRY666/CustomItemLevelValue-ModExtension/issues)
 [![Stars](https://img.shields.io/github/stars/FIKRY666/CustomItemLevelValue-ModExtension.svg?style=social)](https://github.com/FIKRY666/CustomItemLevelValue-ModExtension/stargazers)
