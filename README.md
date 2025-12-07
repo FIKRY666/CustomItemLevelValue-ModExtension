@@ -1,338 +1,339 @@
-# CustomItemLevelValue - ModExtensions 框架
+```csharp
+# 🎮 CustomItemLevelValue - ModExtensions 框架
+
+<div align="center">
 
 [![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-2.0.0-green.svg)](https://github.com/yourusername/CustomItemLevelValue/releases)
-[![Game](https://img.shields.io/badge/Game-逃离鸭科夫-red.svg)](https://store.steampowered.com/app/3167020/_/)
-[![Performance](https://img.shields.io/badge/性能-提升10倍-important.svg)](#技术优势)
-[![API](https://img.shields.io/badge/API-简单易用-success.svg)](#api速览-5分钟上手)
+[![Version](https://img.shields.io/badge/version-2.0.0-brightgreen.svg)](https://github.com/FIKRY666/CustomItemLevelValue-ModExtension/releases)
+[![Downloads](https://img.shields.io/github/downloads/FIKRY666/CustomItemLevelValue-ModExtension/total.svg?color=orange)](https://github.com/FIKRY666/CustomItemLevelValue-ModExtension/releases)
+[![Open Issues](https://img.shields.io/github/issues/FIKRY666/CustomItemLevelValue-ModExtension.svg)](https://github.com/FIKRY666/CustomItemLevelValue-ModExtension/issues)
+[![Stars](https://img.shields.io/github/stars/FIKRY666/CustomItemLevelValue-ModExtension.svg?style=social)](https://github.com/FIKRY666/CustomItemLevelValue-ModExtension/stargazers)
 
-**为《逃离鸭科夫》Mod开发者打造的终极显示解决方案** - 让你的Mod信息像原生功能一样优雅显示！
+</div>
 
-## ✨ 核心价值主张
+## 🚀 一句话介绍
 
-> **"标准化显示、高性能刷新、美观统一，三行代码让Mod信息完美集成"**
+**"三行代码，让任何Mod都能在《逃离鸭科夫》物品面板中优雅显示自定义信息"**
 
-### 🎯 解决什么痛点？
+## ✨ 核心价值
 
-#### **痛点1：UI显示混乱不堪**
-传统Mod各自为战，UI像补丁拼接。你的Mod信息、我的Mod信息、他的Mod信息...布局杂乱，视觉灾难！
+传统Mod显示信息：UI混乱、性能低下、重复造轮子
+你的Mod使用本框架：**布局统一、性能优化、开发简单**
 
-#### **痛点2：刷新性能低下**
-实时监测Mod每秒检查60次，强制全刷新。结果：**卡顿、掉帧、高CPU占用**，玩家体验极差。
+## 🎯 GitHub特色玩法
 
-#### **痛点3：开发复杂度高**
-每个Mod都要自己处理：UI布局、颜色样式、刷新时机、多Mod兼容...**90%的代码在重复造轮子**！
+### 🔄 双模式支持：你选哪个？
 
-### ✨ 你的解决方案：一次标准化，终身受益
-
-## 🚀 五段式标准化布局
-
-```
-┌─────────────────────────────────┐
-│ 🔮 稀有度显示                    │
-│ [你的Mod信息] ← Top1 位置        │
-├─────────────────────────────────┤
-│ 💰 价值信息                      │
-│ [你的Mod信息] ← Top2 位置        │
-├─────────────────────────────────┤
-│ ⚔️ 核心属性                      │
-│ [你的Mod信息] ← Top3 位置        │
-├─────────────────────────────────┤
-│ 📖 物品描述                      │
-│ [你的Mod信息] ← Bottom1 位置     │
-├─────────────────────────────────┤
-│ [你的Mod信息] ← Bottom2 位置     │
-│ ⚙️ 耐久度信息                    │
-└─────────────────────────────────┘
+```mermaid
+graph TD
+    A[开始] --> B{使用模式选择};
+    B --> C[模式1: 便携API];
+    B --> D[模式2: 直接引用];
+    
+    C --> E[优点: 无需DLL引用];
+    C --> F[缺点: 需要反射];
+    
+    D --> G[优点: 性能更好];
+    D --> H[缺点: 需要DLL];
+    
+    E --> I[适合: 小型Mod];
+    F --> I;
+    G --> J[适合: 大型Mod];
+    H --> J;
+    
+    I --> K[下载: ModExtensionsAPI.cs];
+    J --> L[下载: CustomItemLevelValue.dll];
 ```
 
-**五个固定位置，告别UI混乱** - 所有Mod和谐共存，各显其位！
+### 📥 快速获取文件
 
-## ⚡ 性能优势
+```bash
+# 方式1: 直接下载（推荐新手）
+点击右侧 Releases → 下载最新版
 
-**实测数据（i5-12400F + GTX 1660S）相同功能的信息mod
-其他分散mod VS 本集成mod：**
+# 方式2: Git Clone（推荐开发者）
+git clone https://github.com/FIKRY666/CustomItemLevelValue-ModExtension.git
 
-| 场景 | 传统方式 | ModExtensions | 提升 |
-|------|----------|---------------|------|
-| 快速切换物品 | 1.5ms/次 | 0.75ms/次 | **快2倍** |
-| 查看同类物品 | 15ms/秒 | 3ms/秒 | **快5倍** |
-| 内存占用(50物品) | 32MB | 24MB | **减少25%** |
-| 帧率稳定性 | 下降3-8 FPS | 下降0-3 FPS | **更稳定** |
+# 方式3: 只下载需要的文件
+# 便携API（模式1）:
+wget https://raw.githubusercontent.com/FIKRY666/CustomItemLevelValue-ModExtension/main/ModExtensionsAPI.cs
 
-**核心优势：**
-1. 缓存系统减少90%重复计算
-2. 字段隔离保证多Mod兼容
-3. 自动样式继承，开发简单
-   
-### 🏆 为什么性能这么好？
-
-#### **1. 智能缓存系统**
-```csharp
-// 传统：每次悬停都重新扫描所有字段
-// 你的框架：5分钟智能缓存 + 变化检测
-if (缓存有效 && 数据未变化) {
-    return 缓存结果; // 零开销！
-}
+# 完整框架（模式2）:
+wget https://github.com/FIKRY666/CustomItemLevelValue-ModExtension/releases/latest/download/CustomItemLevelValue.dll
 ```
 
-#### **2. 分离式刷新API**
-```csharp
-// 批量更新：先更新所有缓存，最后统一刷新UI
-for (int i = 0; i < 10; i++) {
-    UpdateField(i);
-    ModExtensionsManager.RefreshCacheOnly(item); // 只更新缓存
-}
-ModExtensionsUIRefresher.RequestUIRefresh(item); // 一次UI刷新！
-```
+## ⚡ 两种模式，任你选择
 
-#### **3. 自动样式继承**
-自动适配主Mod的配色方案、字体大小、布局边距，**无需任何样式代码**！
+### 模式1️⃣: 便携API（零依赖）
 
-## 🛠️ API速览：5分钟上手
-
-### 🚀 最简示例：三行代码集成
+**适合人群**：想快速测试、不想引用DLL、新手Modder
 
 ```csharp
-using Duckov.Modding;
-using ItemStatsSystem;
+// 1. 下载这个文件到你的项目:
+// ModExtensionsAPI.cs (从Releases页面获取)
+
+// 2. 在代码中使用：
 using UnityEngine;
 
-namespace YourMod
+public class YourMod : MonoBehaviour
 {
-    public class ModBehaviour : Duckov.Modding.ModBehaviour
+    private const string MOD_PREFIX = "YourMod_";
+    
+    void Start()
     {
-        private const string PREFIX = "YourMod_";
+        // 初始化API（自动连接主框架）
+        ModExtensionsAPI.Init();
         
-        private void OnItemHovered(ItemHoveringUI ui, Item item)
-        {
-            if (item == null) return;
-            
-            // 1. 写入字段（选择五个位置之一）
-            item.Variables.SetString($"{PREFIX}Top1_状态", 
-                "[c=#55FF55]✓ 可用[/c] | 耐久: 85%");
-            
-            // 2. 触发刷新（自动应用所有样式）
-            ModExtensionsManager.Instance.RefreshItemCache(item);
-            // 完成！信息已优雅显示
-        }
+        // 注册你的Mod
+        ModExtensionsAPI.RegisterMod(MOD_PREFIX);
+    }
+    
+    void OnItemHovered(Item item)
+    {
+        // 写入字段
+        item.Variables.SetString($"{MOD_PREFIX}Top1_状态", 
+            "[color=green]✓ 运行正常[/color]");
+        
+        // 刷新显示（三行代码完成！）
+        ModExtensionsAPI.RefreshItemCache(item);
     }
 }
 ```
 
-### 📍 五个显示位置速查表
+### 模式2️⃣: 直接引用（高性能）
 
-| 位置 | 显示时机 | 推荐用途 | 示例 |
-|------|----------|----------|------|
-| **Top1** | 稀有度后，价值前 | 状态信息、紧急通知 | `[c=#FF5555]⚠️ 警告：即将损坏[/c]` |
-| **Top2** | 价值后，属性前 | 市场数据、趋势信息 | `价格: [c=#FFD700]1,250金币[/c] ↑12%` |
-| **Top3** | 属性后，容器前 | 评分建议、特殊效果 | `评分: ★★★★☆ 适合近战职业` |
-| **Bottom1** | 描述后，耐久前 | 背景故事、来源说明 | `这把剑拥有300年历史...` |
-| **Bottom2** | 耐久前，最后位置 | 使用提示、维护建议 | `预计剩余: 战斗15次 / 挖掘30次` |
-
-### 🔄 刷新控制API（三种模式）
+**适合人群**：正式项目、性能要求高、老手Modder
 
 ```csharp
-// 模式1：标准刷新（推荐）
-// 适用：单个字段更新，需要立即显示
-ModExtensionsManager.Instance.RefreshItemCache(item);
+// 1. 引用这个DLL到你的项目:
+// CustomItemLevelValue.dll (从Releases页面下载)
 
-// 模式2：高性能批量更新
-// 适用：批量更新多个字段，最后统一显示
-ModExtensionsManager.Instance.RefreshCacheOnly(item); // 只更新缓存
-// ...更新其他字段...
-ModExtensionsUIRefresher.RequestUIRefresh(item); // 最后触发UI
+// 2. 在代码中使用：
+using CustomItemLevelValue.Core;
 
-// 模式3：强制重新扫描
-// 适用：数据来源变化，需要清除缓存
-var data = ModExtensionsManager.Instance.GetExtensionsByPosition(
-    item, "Top1", forceRescan: true);
-```
-
-### 🎨 富文本样式速查（自动继承主Mod配色！）
-
-```csharp
-// 基础颜色（自动适配当前配色方案）
-"[c=#FF5555]红色警告[/c]"      // 危险/负面
-"[c=#55FF55]绿色成功[/c]"      // 安全/正面  
-"[c=#FFAA00]黄色警告[/c]"      // 警告/注意
-"[c=#FFD700]金色重要[/c]"      // 重要/稀有
-
-// 文本样式
-"[b]粗体标题[/b]"              // 加粗
-"[i]斜体备注[/i]"              // 斜体
-"[size=14]自定义大小[/size]"   // 字号
-
-// 组合使用
-"[b][c=#FFD700]金色粗体重要信息[/c][/b]"
-
-// 特殊元素
-"[hr]"                        // 水平分隔线
-"★☆☆☆☆"                      // 星级评分
-```
-
-### ⚡ 性能优化最佳实践
-
-```csharp
-// 1. 智能变化检测（框架内置）
-// 框架自动检测数据变化，无变化不刷新
-
-// 2. 手动控制刷新频率
-private float _lastUpdateTime;
-void Update() {
-    if (Time.time - _lastUpdateTime > 1f) { // 每秒最多1次
-        更新数据();
-        _lastUpdateTime = Time.time;
-    }
-}
-
-// 3. 字段名前缀规范
-private const string PREFIX = "YourMod_";
-// 防止多Mod冲突，自动隔离
-```
-
-## 📦 快速开始
-
-### 前置要求
-1. 《逃离鸭科夫》游戏本体
-2. [CustomItemLevelValue 主Mod](https://steamcommunity.com/sharedfiles/filedetails/?id=3612733981)
-3. .NET Standard 2.1 开发环境
-
-### 四步集成
-```csharp
-// 步骤1：添加引用
-// 引用主Mod的dll文件
-
-// 步骤2：基本结构
-public class YourModBehaviour : Duckov.Modding.ModBehaviour
+public class YourMod : MonoBehaviour
 {
-    private const string PREFIX = "YourMod_";
+    private const string MOD_PREFIX = "YourMod_";
     
-    private void OnEnable()
+    void Start()
     {
-        ItemHoveringUI.onSetupItem += OnItemHovered;
+        // 直接访问管理器
+        ModExtensionsManager.Instance.RegisterMod(MOD_PREFIX);
     }
     
-    private void OnItemHovered(ItemHoveringUI ui, Item item)
+    void OnItemHovered(Item item)
     {
-        // 步骤3：写入字段
-        item.Variables.SetString($"{PREFIX}Top1_状态", "你的信息");
+        // 写入字段
+        item.Variables.SetString($"{MOD_PREFIX}Top1_状态", 
+            "[color=green]✓ 运行正常[/color]");
         
-        // 步骤4：触发刷新
+        // 刷新显示（三行代码完成！）
         ModExtensionsManager.Instance.RefreshItemCache(item);
     }
 }
 ```
 
-## 🛡️ 兼容性与健壮性
+## 📍 五个显示位置速查表
 
-### 多Mod共存保障
+| 位置 | 显示时机 | 推荐用途 | 示例 |
+|------|----------|----------|------|
+| **Top1** | 稀有度后 | 状态信息 | `[color=green]✓ 可用[/color]` |
+| **Top2** | 价值后 | 市场数据 | `价格: [color=yellow]1,250金币[/color]` |
+| **Top3** | 属性后 | 评分建议 | `评分: ★★★★☆` |
+| **Bottom1** | 描述后 | 背景故事 | `拥有300年历史...` |
+| **Bottom2** | 耐久前 | 使用提示 | `预计剩余: 战斗15次` |
+
+## 🎨 富文本样式速查
+
 ```csharp
-// 字段命名空间隔离，永不冲突：
-Market_Top1_价格    // 市场Mod
-Quest_Top1_进度     // 任务Mod  
-Gear_Top1_评分      // 装备Mod
-// 全部同时显示，和谐共存
+// 基础颜色
+"[color=green]绿色 - 成功/可用[/color]"
+"[color=red]红色 - 危险/错误[/color]"  
+"[color=yellow]黄色 - 警告/注意[/color]"
+"[color=orange]橙色 - 重要信息[/color]"
+
+// 文本样式
+"[b]粗体标题[/b]"              // 加粗
+"[i]斜体备注[/i]"              // 斜体
+
+// 组合使用
+"[b][color=yellow]重要:[/color][/b] 请及时处理"
 ```
 
-### 错误处理最佳实践
-```csharp
-private void OnItemHovered(ItemHoveringUI ui, Item item)
-{
-    try
-    {
-        if (item == null) return;
-        
-        // 写入字段
-        item.Variables.SetString($"{PREFIX}Top1_状态", 获取数据());
-        
-        // 安全刷新
-        try
-        {
-            ModExtensionsManager.Instance.RefreshItemCache(item);
-        }
-        catch (System.Exception ex)
-        {
-            Debug.LogWarning($"刷新失败: {ex.Message}");
-            // 备用刷新方案...
-        }
-    }
-    catch (System.Exception ex)
-    {
-        Debug.LogError($"Mod处理异常: {ex.Message}");
-    }
-}
+## 📦 安装四步曲
+
+### 第一步：下载框架
+```bash
+# 选择你的模式：
+🔹 模式1用户: 下载 ModExtensionsAPI.cs
+🔸 模式2用户: 下载 CustomItemLevelValue.dll
 ```
 
-## 📚 进阶指南
+### 第二步：安装主Mod
+1. 订阅 [Steam创意工坊](https://steamcommunity.com/sharedfiles/filedetails/?id=3612733981)
+2. 或下载 [GitHub Release](https://github.com/FIKRY666/CustomItemLevelValue-ModExtension/releases)
 
-### 完整生命周期管理
+### 第三步：创建你的Mod项目
+```xml
+<!-- YourMod.csproj -->
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>YourMod</AssemblyName>
+  </PropertyGroup>
+  
+  <!-- 模式2用户添加这个： -->
+  <ItemGroup>
+    <Reference Include="CustomItemLevelValue.dll" />
+  </ItemGroup>
+</Project>
+```
+
+### 第四步：测试运行
 ```csharp
-public class YourModBehaviour : Duckov.Modding.ModBehaviour
+// 完整的测试代码
+public class TestMod : Duckov.Modding.ModBehaviour
 {
-    private const string PREFIX = "YourMod_";
-    private HashSet<int> _processedItems = new HashSet<int>();
+    private const string PREFIX = "Test_";
     
-    void Start() { /* 初始化 */ }
-    
-    void OnEnable() 
-    { 
-        ItemHoveringUI.onSetupItem += OnItemHovered; 
+    void OnEnable()
+    {
+        ItemHoveringUI.onSetupItem += OnItemHovered;
+        Debug.Log("✅ Mod已启用");
     }
     
     void OnItemHovered(ItemHoveringUI ui, Item item)
     {
-        // 避免重复处理
-        if (_processedItems.Contains(item.GetInstanceID())) return;
-        _processedItems.Add(item.GetInstanceID());
+        item.Variables.SetString($"{PREFIX}Top1_测试", 
+            "[color=green]🎉 框架工作正常！[/color]");
         
-        // 你的业务逻辑...
-    }
-    
-    void OnDisable() 
-    { 
-        ItemHoveringUI.onSetupItem -= OnItemHovered;
-        CleanupFields(); // 清理自己的字段
-    }
-    
-    void CleanupFields()
-    {
-        ModExtensionsManager.Instance.ClearCacheByPrefix(PREFIX);
+        // 模式1用户用这个：
+        ModExtensionsAPI.RefreshItemCache(item);
+        
+        // 模式2用户用这个：
+        // ModExtensionsManager.Instance.RefreshItemCache(item);
     }
 }
 ```
 
-## 🔗 相关资源
+## 🐛 常见问题
 
-- **[完整API文档](API-Reference.md)** - 详细API说明
-- **[实战示例代码](DemoModExtension.md)** - 完整演示Mod
-- **[常见问题解答](FAQ.md)** - 问题解决方案
+### ❓ 哪个模式适合我？
+- **选模式1**：如果你是新手、想快速测试、项目简单
+- **选模式2**：如果你是老手、需要高性能、项目复杂
 
-## 🤝 贡献指南
+### ❓ 字段不显示？
+1. 检查前缀格式：`YourMod_Top1_字段名`
+2. 确认调用了刷新API
+3. 查看游戏日志：按F8打开控制台
 
-1. Fork 本仓库
-2. 创建功能分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 创建 Pull Request
+### ❓ 框架没加载？
+```csharp
+// 添加检查代码
+void Start()
+{
+    if (!ModExtensionsAPI.IsAvailable()) // 模式1
+    // 或 if (ModExtensionsManager.Instance == null) // 模式2
+    {
+        Debug.LogError("❌ 框架未加载！请安装主Mod");
+    }
+}
+```
+
+## 🤝 GitHub协作指南
+
+### 🐛 报告Bug
+点击 [Issues](https://github.com/FIKRY666/CustomItemLevelValue-ModExtension/issues) → New Issue → 选择Bug模板
+
+### 💡 建议功能
+1. Fork本仓库
+2. 创建分支：`feature/你的功能`
+3. 提交代码
+4. 创建Pull Request
+
+### 📊 查看统计数据
+```bash
+# 查看项目热度
+https://api.github.com/repos/FIKRY666/CustomItemLevelValue-ModExtension
+
+# 下载量统计
+https://github.com/FIKRY666/CustomItemLevelValue-ModExtension/releases
+```
+
+## 📁 文件结构速览
+
+```
+CustomItemLevelValue-ModExtension/
+├── 📄 README.md                    # 本文件
+├── 📁 Releases/                    # 发布文件
+│   ├── CustomItemLevelValue.dll    # 模式2：完整框架
+│   └── ModExtensionsAPI.cs         # 模式1：便携API
+├── 📁 Demo/                        # 示例代码
+│   ├── DemoModAPI.cs              # 模式1示例
+│   └── DemoModDLL.cs              # 模式2示例
+└── 📁 Docs/                        # 文档
+    ├── API-Reference.md           # API文档
+    └── FAQ.md                     # 常见问题
+```
+
+## 🎮 实战示例
+
+### 示例1：物品状态显示
+```csharp
+void ShowItemStatus(Item item)
+{
+    // 写入状态信息
+    string status = item.Durability < 0.3f 
+        ? "[color=red]⚠️ 即将损坏[/color]" 
+        : "[color=green]✓ 状态良好[/color]";
+    
+    item.Variables.SetString($"{PREFIX}Top1_状态", status);
+    
+    // 刷新显示
+    ModExtensionsAPI.RefreshItemCache(item); // 模式1
+    // 或 ModExtensionsManager.Instance.RefreshItemCache(item); // 模式2
+}
+```
+
+### 示例2：市场价显示
+```csharp
+void ShowMarketPrice(Item item)
+{
+    float price = CalculateMarketPrice(item);
+    string priceText = $"[b]市场价:[/b] [color=yellow]{price:N0}金币[/color]";
+    
+    item.Variables.SetString($"{PREFIX}Top2_价格", priceText);
+    RefreshDisplay(item); // 调用你的刷新方法
+}
+```
+
+## 📞 获取帮助
+
+1. **查看文档**：本仓库的Docs文件夹
+2. **参考示例**：Demo文件夹的完整代码
+3. **提交Issue**：描述你的问题
+4. **查看已有问题**：可能已经有人遇到过
 
 ## 📄 许可证
 
-本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情。
+MIT License - 查看 [LICENSE](LICENSE) 文件了解详情。
 
-## 🌟 星标历史
+---
+
+<div align="center">
+
+### ⭐ Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=FIKRY666/CustomItemLevelValue-ModExtension&type=Date)](https://star-history.com/#FIKRY666/CustomItemLevelValue-ModExtension&Date)
 
-## 🙏 致谢
+**如果你觉得这个项目有用，请给它一个Star！✨**
 
-感谢所有贡献者和测试人员，特别感谢《逃离鸭科夫》开发团队提供的优秀Mod系统！
+</div>
+
+## 🚀 开始你的Mod开发之旅！
+
+选择你的模式 → 下载对应文件 → 编写三行代码 → 享受优雅的Mod信息显示！
+
+**有问题？随时提交Issue！**
 
 ---
-
-**💡 提示**：查看 [DemoModExtension](https://github.com/FIKRY666/CustomItemLevelValue-ModExtension/releases/tag/MOD) 获取完整演示Mod代码！
-
-**开始为你的Mod添加酷炫的自定义显示吧！** 🚀
-
----
-*如遇问题，请查看 [FAQ](FAQ.md) 或提交 Issue。*
