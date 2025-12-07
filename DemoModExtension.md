@@ -42,11 +42,12 @@ using Duckov.Modding;
 using Duckov.UI;
 using Duckov.Utilities;
 using ItemStatsSystem;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
+using Object = UnityEngine.Object;
 namespace DemoModExtension
 {
     public class ModBehaviour : Duckov.Modding.ModBehaviour
@@ -189,10 +190,91 @@ namespace DemoModExtension
 
         private void OnDisable()
         {
-            _isModActive = false;
-            ItemHoveringUI.onSetupItem -= OnItemHovered;
-            CleanupAllFields();
-            Log("🛑 Mod已禁用，所有演示字段已清理", LogType.Warning);
+            try
+            {
+                _isModActive = false;
+
+                // 1. 移除事件监听
+                ItemHoveringUI.onSetupItem -= OnItemHovered;
+
+                // 2. 【简化】只需通知主Mod，主Mod会负责清理
+                NotifyMainModForCleanup();
+
+                // 3. 清理本地状态（不清理物品字段，由主Mod负责）
+                ClearLocalState();
+
+                Log("🛑 Mod已卸载，已通知主Mod清理字段", LogType.Warning);
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"[DemoMod] 卸载异常: {ex.Message}");
+            }
+        }
+
+        private void NotifyMainModForCleanup()
+        {
+            try
+            {
+                if (!CheckFrameworkLoaded()) return;
+
+                var modExtensionsType = System.Type.GetType("CustomItemLevelValue.Core.ModExtensionsManager, CustomItemLevelValue");
+                if (modExtensionsType == null) return;
+
+                var instanceProperty = modExtensionsType.GetProperty("Instance");
+                var markMethod = modExtensionsType.GetMethod("MarkModAsDeleted");
+
+                if (instanceProperty != null && markMethod != null)
+                {
+                    var instance = instanceProperty.GetValue(null);
+                    markMethod.Invoke(instance, new object[] { MOD_PREFIX });
+                    Log($"🏷️ 已通知主Mod清理 {MOD_PREFIX} 字段", LogType.Info);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                LogWarning($"通知主Mod失败: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// 清理本地状态（不清理物品字段）
+        /// 教学点：正确的状态清理，避免内存泄漏
+        /// </summary>
+        private void ClearLocalState()
+        {
+            try
+            {
+                Log("🧼 开始清理本地状态...", LogType.Info, LogLevel.Debug);
+
+                // 1. 清理物品引用
+                _lastHoveredItem = null;
+                _lastHoveredUI = null;
+
+                // 2. 清理计数器状态
+                _currentItemInstanceId = -1;
+                _hoverCounter = 0;
+
+                // 3. 清理数据变化检测状态
+                _forceNextRefresh = false;
+                _lastProgressCharge = -1f;
+                _lastColorScheme = ColorScheme.热情火焰;
+                _lastHoverCounter = -1;
+
+                // 4. 清理进度条状态
+                _progressCharge = 0f;
+                _progressTimer = 0f;
+
+                // 5. 清理配色状态
+                _schemeIndex = 0;
+                _currentScheme = ColorScheme.热情火焰;
+                _textPoolIndex = 0;
+
+                Log("✅ 本地状态清理完成", LogType.Info, LogLevel.Debug);
+            }
+            catch (Exception ex)
+            {
+                LogError($"清理本地状态失败: {ex.Message}");
+            }
         }
 
         private void Update()
