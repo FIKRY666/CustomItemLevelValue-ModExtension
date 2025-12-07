@@ -27,8 +27,9 @@
 |---------|---------|--------------|----------|
 | 🔹 **模式1：便携API** | 新手、快速测试、不想引用DLL | `ModExtensionsAPI.cs` | [GitHub Releases - API](https://github.com/FIKRY666/CustomItemLevelValue-ModExtension/releases/tag/API) |
 | 🔸 **模式2：直接引用** | 正式项目、性能要求高 | `CustomItemLevelValue.dll` | [Steam创意工坊订阅](https://steamcommunity.com/sharedfiles/filedetails/?id=3612733981) |
-### 📥 快速获取文件
 
+
+### 📥 快速获取文件
 
 ## ⚡ 两种模式，任你选择
 
@@ -101,6 +102,7 @@ public class YourMod : MonoBehaviour
 }
 ```
 
+
 ## 📍 五个显示位置速查表
 
 | 位置 | 显示时机 | 推荐用途 | 示例 |
@@ -128,6 +130,7 @@ public class YourMod : MonoBehaviour
 "[b][color=yellow]重要:[/color][/b] 请及时处理"
 ```
 
+
 ## 📦 安装四步曲
 
 ### 第一步：下载框架
@@ -136,6 +139,7 @@ public class YourMod : MonoBehaviour
 🔹 模式1用户: 下载 ModExtensionsAPI.cs
 🔸 模式2用户: 下载 CustomItemLevelValue.dll
 ```
+
 
 ### 第二步：安装主Mod
 1. 订阅 [Steam创意工坊](https://steamcommunity.com/sharedfiles/filedetails/?id=3612733981)
@@ -157,6 +161,7 @@ public class YourMod : MonoBehaviour
   </ItemGroup>
 </Project>
 ```
+
 
 ### 第四步：测试运行
 ```csharp
@@ -185,6 +190,7 @@ public class TestMod : Duckov.Modding.ModBehaviour
 }
 ```
 
+
 ## 🐛 常见问题
 
 ### ❓ 哪个模式适合我？
@@ -209,6 +215,7 @@ void Start()
 }
 ```
 
+
 ## 📁 文件结构速览
 
 ```
@@ -224,6 +231,7 @@ CustomItemLevelValue-ModExtension/
     ├── API-Reference.md           # API文档
     └── FAQ.md                     # 常见问题
 ```
+
 
 ## 🎮 实战示例
 
@@ -256,8 +264,6 @@ void ShowMarketPrice(Item item)
 }
 ```
 
-
-<div align="center">
     
 ## 📚 详细文档
 
