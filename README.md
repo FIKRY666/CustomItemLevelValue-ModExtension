@@ -269,7 +269,6 @@ void ShowMarketPrice(Item item)
 
 - **[完整API参考](Docs/API-Reference.md)** - 查看所有API的详细说明和使用示例
 - **[常见问题解答](FAQ.md)** - 遇到问题先看这里
-- **[更新日志](CHANGELOG.md)** - 查看版本更新内容
 
 
 </div>
