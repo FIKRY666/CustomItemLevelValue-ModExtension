@@ -209,18 +209,6 @@ void Start()
 }
 ```
 
-## 🤝 GitHub协作指南
-
-### 🐛 报告Bug
-点击 [Issues](https://github.com/FIKRY666/CustomItemLevelValue-ModExtension/issues) → New Issue → 选择Bug模板
-
-### 💡 建议功能
-1. Fork本仓库
-2. 创建分支：`feature/你的功能`
-3. 提交代码
-4. 创建Pull Request
-
-
 ## 📁 文件结构速览
 
 ```
