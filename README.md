@@ -141,6 +141,7 @@ public class YourMod : MonoBehaviour
 1. 订阅 [Steam创意工坊](https://steamcommunity.com/sharedfiles/filedetails/?id=3612733981)
 2. 或下载 [GitHub Release](https://github.com/FIKRY666/CustomItemLevelValue-ModExtension/releases)
 
+
 ### 第三步：创建你的Mod项目
 ```xml
 <!-- YourMod.csproj -->
@@ -267,20 +268,14 @@ void ShowMarketPrice(Item item)
 }
 ```
 
-## 📞 获取帮助
-
-
-**参考示例**：Demo文件夹的完整代码
-**提交Issue**：描述你的问题
-**查看已有问题**：可能已经有人遇到过
-
-## 📄 许可证
-
-MIT License - 查看 [LICENSE](LICENSE) 文件了解详情。
-
----
 
 <div align="center">
+    
+## 📚 详细文档
+
+- **[完整API参考](Docs/API-Reference.md)** - 查看所有API的详细说明和使用示例
+- **[常见问题解答](FAQ.md)** - 遇到问题先看这里
+- **[更新日志](CHANGELOG.md)** - 查看版本更新内容
 
 
 </div>
